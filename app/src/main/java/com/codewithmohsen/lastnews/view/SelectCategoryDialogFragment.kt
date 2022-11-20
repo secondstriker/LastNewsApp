@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import timber.log.Timber
 import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
-import com.codewithmohsen.lastnews.models.Category
+import com.codewithmohsen.lastnews.clean.domain.models.Category
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.databinding.ActivityNewsListBinding
-import com.codewithmohsen.lastnews.models.Category
-import com.codewithmohsen.lastnews.repository.Status
+import com.codewithmohsen.lastnews.clean.domain.models.Category
+import com.codewithmohsen.lastnews.clean.domain.Status
 import com.codewithmohsen.lastnews.vm.NewsListViewModel
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber

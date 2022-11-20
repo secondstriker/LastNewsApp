@@ -1,17 +1,20 @@
-package com.codewithmohsen.lastnews.repository
+package com.codewithmohsen.lastnews.clean.domain.repository
 
-import com.codewithmohsen.lastnews.Config.LONG_LOADING_THRESHOLD
-import com.codewithmohsen.lastnews.api.APIErrorResponse
-import com.codewithmohsen.lastnews.api.ErrorModel
-import com.codewithmohsen.lastnews.api.NetworkResponse
-import com.codewithmohsen.lastnews.di.CoroutinesScopesModule.ApplicationScope
-import com.codewithmohsen.lastnews.di.IoDispatcher
+import com.codewithmohsen.lastnews.clean.domain.api.APIErrorResponse
+import com.codewithmohsen.lastnews.clean.domain.api.ErrorModel
+import com.codewithmohsen.lastnews.clean.domain.api.NetworkResponse
+import com.codewithmohsen.lastnews.clean.domain.di.CoroutinesScopesModule.ApplicationScope
+import com.codewithmohsen.lastnews.clean.domain.Resource
+import com.codewithmohsen.lastnews.clean.domain.Status
+import com.codewithmohsen.lastnews.clean.common.Config
+import com.codewithmohsen.lastnews.clean.common.Logger
+import com.codewithmohsen.lastnews.clean.domain.di.IoDispatcher
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
-import kotlin.coroutines.coroutineContext
 
 abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
+    private val config: Config,
+    private val logger: Logger,
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
@@ -23,13 +26,13 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
         val apiJob = launch(ioDispatcher) { getData(refresh) }
         val longLoadingJob = launch(ioDispatcher) { longLoading() }
          apiJob.invokeOnCompletion { cause ->
-             Timber.d("invokeOnCompletion")
+             logger.d("invokeOnCompletion")
              if (longLoadingJob.isActive) {
-                 Timber.d("invokeOnCompletion long loading is cancelled.")
+                 logger.d("invokeOnCompletion long loading is cancelled.")
                  longLoadingJob.cancel()
              }
              if(apiJob.isCancelled) {
-                 Timber.d("invokeOnCompletion main job is cancelled.")
+                 logger.d("invokeOnCompletion main job is cancelled.")
                  externalCoroutineScope.launch(ioDispatcher) {
                      setValue(Resource.cancel(_result.value.data))
                  }
@@ -40,7 +43,7 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     }
 
     private suspend fun getData(refresh: Boolean) {
-        Timber.d("getData")
+        logger.d("getData")
         if(refresh)
             setValue(Resource.loading(null))
         else
@@ -100,12 +103,12 @@ abstract class BaseOnlineRepository<ApiModel: Any, ResultModel: Any>(
     }
 
     private suspend fun longLoading() = withContext(ioDispatcher) {
-        delay(LONG_LOADING_THRESHOLD)
+        delay(config.longRunningThreshold)
         if(_result.value.status == Status.LOADING)
             setValue(Resource.longLoading(_result.value.data))
     }
 
     protected open fun getResultAsFlow() = _result.asStateFlow()
-    protected abstract suspend fun apiCall(): NetworkResponse<ApiModel,  APIErrorResponse<ErrorModel>>
+    protected abstract suspend fun apiCall(): NetworkResponse<ApiModel, APIErrorResponse<ErrorModel>>
     protected abstract suspend fun bodyToResult(apiModel: ApiModel?): ResultModel
 }

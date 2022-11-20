@@ -11,7 +11,7 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.ActivityDetailsBinding
-import com.codewithmohsen.lastnews.models.Article
+import com.codewithmohsen.lastnews.clean.domain.models.Article
 import com.codewithmohsen.lastnews.vm.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.di
+package com.codewithmohsen.lastnews.clean.domain.di
 
 import javax.inject.Qualifier
 

@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.repository
+package com.codewithmohsen.lastnews.clean.domain
 
 
 /**

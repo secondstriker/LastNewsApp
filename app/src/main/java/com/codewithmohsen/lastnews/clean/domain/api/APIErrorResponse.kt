@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.api
+package com.codewithmohsen.lastnews.clean.domain.api
 
 sealed class APIErrorResponse<E> {
 

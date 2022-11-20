@@ -2,7 +2,10 @@ package com.codewithmohsen.lastnews.api
 
 import com.codewithmohsen.lastnews.api.Constants.COUNTRY
 import com.codewithmohsen.lastnews.api.Constants.PAGE_SIZE
-import com.codewithmohsen.lastnews.models.ResponseModel
+import com.codewithmohsen.lastnews.clean.domain.api.APIErrorResponse
+import com.codewithmohsen.lastnews.clean.domain.api.ErrorModel
+import com.codewithmohsen.lastnews.clean.domain.api.NetworkResponse
+import com.codewithmohsen.lastnews.clean.domain.models.ResponseModel
 import retrofit2.http.*
 
 

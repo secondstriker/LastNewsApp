@@ -1,14 +1,13 @@
 package com.codewithmohsen.lastnews.adapter
 
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.NewsItemBinding
-import com.codewithmohsen.lastnews.di.DefaultDispatcher
-import com.codewithmohsen.lastnews.models.Article
+import com.codewithmohsen.lastnews.clean.domain.di.DefaultDispatcher
+import com.codewithmohsen.lastnews.clean.domain.models.Article
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 

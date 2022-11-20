@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.models
+package com.codewithmohsen.lastnews.clean.domain.models
 
 enum class Category {
     general,

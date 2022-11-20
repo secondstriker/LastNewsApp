@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.codewithmohsen.lastnews.models.Article" />
+            type="com.codewithmohsen.lastnews.clean.domain.models.Article" />
 
     </data>
 

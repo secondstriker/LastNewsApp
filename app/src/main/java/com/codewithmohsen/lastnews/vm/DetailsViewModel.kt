@@ -3,7 +3,7 @@ package com.codewithmohsen.lastnews.vm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.codewithmohsen.lastnews.models.Article
+import com.codewithmohsen.lastnews.clean.domain.models.Article
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

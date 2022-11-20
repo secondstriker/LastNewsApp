@@ -1,5 +1,8 @@
 package com.codewithmohsen.lastnews.api
 
+import com.codewithmohsen.lastnews.clean.domain.api.APIErrorResponse
+import com.codewithmohsen.lastnews.clean.domain.api.ErrorModel
+import com.codewithmohsen.lastnews.clean.domain.api.NetworkResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews
+package com.codewithmohsen.lastnews.clean.commonAndroid
 
 object Config {
 

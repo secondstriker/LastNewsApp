@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import android.view.ViewGroup
-import com.codewithmohsen.lastnews.di.DefaultDispatcher
+import com.codewithmohsen.lastnews.clean.domain.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor

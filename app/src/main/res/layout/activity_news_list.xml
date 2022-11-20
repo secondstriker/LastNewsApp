@@ -5,13 +5,13 @@
 
     <data>
 
-        <import type="com.codewithmohsen.lastnews.repository.Status" />
+        <import type="com.codewithmohsen.lastnews.clean.domain.Status" />
 
         <import type="android.view.View" />
 
         <variable
             name="status"
-            type="com.codewithmohsen.lastnews.repository.Status" />
+            type="com.codewithmohsen.lastnews.clean.domain.Status" />
 
         <variable
             name="viewModel"

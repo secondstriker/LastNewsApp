@@ -1,5 +1,8 @@
 package com.codewithmohsen.lastnews.api
 
+import com.codewithmohsen.lastnews.clean.domain.api.APIErrorResponse
+import com.codewithmohsen.lastnews.clean.domain.api.ErrorModel
+import com.codewithmohsen.lastnews.clean.domain.api.NetworkResponse
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout

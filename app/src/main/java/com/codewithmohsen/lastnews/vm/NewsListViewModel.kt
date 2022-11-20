@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codewithmohsen.lastnews.models.Category
-import com.codewithmohsen.lastnews.repository.news_list.NewsListRepository
+import com.codewithmohsen.lastnews.clean.domain.models.Category
+import com.codewithmohsen.lastnews.clean.domain.repository.NewsListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject

@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="com.codewithmohsen.lastnews.vm.NewsListViewModel" />
+            type="com.codewithmohsen.lastnews.clean.presentation.vm.NewsListViewModel" />
 
     </data>
 

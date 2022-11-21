@@ -1,8 +1,8 @@
 package com.codewithmohsen.lastnews.di
 
 
+import com.codewithmohsen.lastnews.clean.data.NewsListRepositoryImpl
 import com.codewithmohsen.lastnews.clean.domain.repository.NewsListRepository
-import com.codewithmohsen.lastnews.repository.news_list.NewsListRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

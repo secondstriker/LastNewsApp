@@ -1,37 +1,40 @@
-package com.codewithmohsen.lastnews.repository.news_list
+package com.codewithmohsen.lastnews.clean.data
 
 import com.codewithmohsen.lastnews.clean.common.Config
 import com.codewithmohsen.lastnews.clean.common.Logger
 import com.codewithmohsen.lastnews.clean.domain.di.CoroutinesScopesModule.ApplicationScope
 import com.codewithmohsen.lastnews.clean.domain.di.IoDispatcher
-import com.codewithmohsen.lastnews.clean.domain.models.Article
 import com.codewithmohsen.lastnews.clean.domain.models.ResponseModel
 import com.codewithmohsen.lastnews.clean.domain.repository.BaseOnlineRepository
+import com.codewithmohsen.lastnews.clean.presentation.mappers.map
+import com.codewithmohsen.lastnews.clean.presentation.uiModels.UiArticle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import timber.log.Timber
 
 abstract class PaginationNewsRepository(
-    private val config: Config,
-    private val logger: Logger,
+    config: Config,
+    logger: Logger,
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : BaseOnlineRepository<ResponseModel, List<Article>>(config, logger, externalCoroutineScope, ioDispatcher) {
+) : BaseOnlineRepository<ResponseModel, List<UiArticle>>(config, logger, externalCoroutineScope, ioDispatcher) {
 
     var page: Int = 1
         private set
 
-    override suspend fun bodyToResult(apiModel: ResponseModel?): List<Article> {
+    override suspend fun bodyToResult(apiModel: ResponseModel?): List<UiArticle> {
         val preResult = super.getResultAsFlow().value
         page++
 
         Timber.d("PaginationRepository")
 
-        val result = if (!apiModel?.articles.isNullOrEmpty() && !preResult.data.isNullOrEmpty())
-            preResult.data.plus(apiModel?.articles!!)
+        val newResult = apiModel?.articles?.map { it.map() }
+        val result = if (!newResult.isNullOrEmpty() && !preResult.data.isNullOrEmpty())
+            preResult.data.plus(newResult)
         else if (preResult.data.isNullOrEmpty())
-            apiModel?.articles
-        else preResult.data
+            newResult
+        else
+            preResult.data
 
         if (result.isNullOrEmpty())
             page = 1

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.NewsItemBinding
 import com.codewithmohsen.lastnews.clean.domain.di.DefaultDispatcher
-import com.codewithmohsen.lastnews.clean.domain.models.Article
+import com.codewithmohsen.lastnews.clean.presentation.uiModels.UiArticle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -16,25 +16,16 @@ import kotlinx.coroutines.Dispatchers
  */
 class ItemListAdapter(
     @DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
-    private val itemClickCallback: ((Article) -> Unit)?
-) : DataBoundListAdapter<Article, NewsItemBinding>(
+    private val itemClickCallback: ((UiArticle) -> Unit)?
+) : DataBoundListAdapter<UiArticle, NewsItemBinding>(
     defaultDispatcher,
-    diffCallback = object : DiffUtil.ItemCallback<Article>() {
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+    diffCallback = object : DiffUtil.ItemCallback<UiArticle>() {
+        override fun areItemsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.author == newItem.author &&
-            oldItem.title == newItem.title &&
-            oldItem.content == newItem.content &&
-            oldItem.source == newItem.source &&
-            oldItem.description == newItem.description &&
-            oldItem.publishedAt == newItem.publishedAt &&
-            oldItem.url == newItem.url &&
-            oldItem.urlToImage == newItem.urlToImage
-
-
+        override fun areContentsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
+            return oldItem == newItem
         }
     }
 ) {
@@ -55,7 +46,7 @@ class ItemListAdapter(
         return binding
     }
 
-    override fun bind(binding: NewsItemBinding, item: Article) {
+    override fun bind(binding: NewsItemBinding, item: UiArticle) {
         binding.item = item
     }
 }

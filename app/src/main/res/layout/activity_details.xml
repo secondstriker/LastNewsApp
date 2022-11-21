@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="com.codewithmohsen.lastnews.utils.Converters" />
-
         <import type="android.view.View" />
 
         <variable
             name="item"
-            type="com.codewithmohsen.lastnews.clean.domain.models.Article" />
+            type="com.codewithmohsen.lastnews.clean.presentation.uiModels.UiArticle" />
 
     </data>
 
@@ -46,7 +43,7 @@
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:lines="1"
-                android:text="@{Converters.dateTimeToRequiredFormatForDetail(item.publishedAt)}"
+                android:text="@{item.publishTime}"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +72,7 @@
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:lines="1"
-                android:text="@{item.source.name}"
+                android:text="@{item.sourceName}"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"

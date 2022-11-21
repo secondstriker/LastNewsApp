@@ -1,20 +1,20 @@
-package com.codewithmohsen.lastnews.vm
+package com.codewithmohsen.lastnews.clean.presentation.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.codewithmohsen.lastnews.clean.domain.models.Article
+import com.codewithmohsen.lastnews.clean.presentation.uiModels.UiArticle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
-    val article: LiveData<Article> =
+    val uiArticle: LiveData<UiArticle> =
         savedStateHandle.getLiveData(SAVED_STATE_KEY)
 
-    fun setArticle(article: Article) {
-        savedStateHandle[SAVED_STATE_KEY] = article
+    fun setArticle(uiArticle: UiArticle) {
+        savedStateHandle[SAVED_STATE_KEY] = uiArticle
     }
 
     companion object {

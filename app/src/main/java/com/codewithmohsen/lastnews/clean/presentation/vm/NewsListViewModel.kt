@@ -1,11 +1,13 @@
-package com.codewithmohsen.lastnews.vm
+package com.codewithmohsen.lastnews.clean.presentation.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codewithmohsen.lastnews.clean.domain.models.Category
-import com.codewithmohsen.lastnews.clean.domain.repository.NewsListRepository
+import com.codewithmohsen.lastnews.clean.domain.useCase.FetchMoreNewsUseCase
+import com.codewithmohsen.lastnews.clean.domain.useCase.RefreshUseCase
+import com.codewithmohsen.lastnews.clean.domain.useCase.SetCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsListViewModel @Inject constructor(
-    private val repo: NewsListRepository
+    private val fetchMoreNewsUseCase: FetchMoreNewsUseCase,
+    private val refreshUseCase: RefreshUseCase,
+    private val setCategoryUseCase: SetCategoryUseCase
 ) : ViewModel() {
 
     private lateinit var job: Job
@@ -28,26 +32,26 @@ class NewsListViewModel @Inject constructor(
     fun fetchMoreNews() {
         newJob()
         viewModelScope.launch(job) {
-            repo.fetchMoreNews()
+            fetchMoreNewsUseCase.fetchMoreNews()
         }
     }
 
     fun fetchNews(category: Category) {
         newJob()
-        repo.setCategory(category)
+        setCategoryUseCase(category)
         viewModelScope.launch(job) {
-            repo.refresh()
+            refreshUseCase()
         }
     }
 
     fun refresh() {
         newJob()
         viewModelScope.launch(job) {
-            repo.refresh()
+            refreshUseCase()
         }
     }
 
-    fun getNewsAsFlow() = repo.news
+    fun getNewsAsFlow() = fetchMoreNewsUseCase.news
 
     fun cancel() {
         job.cancel()

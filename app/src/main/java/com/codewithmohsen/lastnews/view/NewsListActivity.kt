@@ -18,7 +18,7 @@ import com.codewithmohsen.lastnews.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.databinding.ActivityNewsListBinding
 import com.codewithmohsen.lastnews.clean.domain.models.Category
 import com.codewithmohsen.lastnews.clean.domain.Status
-import com.codewithmohsen.lastnews.vm.NewsListViewModel
+import com.codewithmohsen.lastnews.clean.presentation.vm.NewsListViewModel
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 

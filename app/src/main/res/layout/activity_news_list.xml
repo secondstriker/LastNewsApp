@@ -5,17 +5,17 @@
 
     <data>
 
-        <import type="com.codewithmohsen.lastnews.clean.domain.Status" />
+        <import type="com.codewithmohsen.lastnews.domain.Status" />
 
         <import type="android.view.View" />
 
         <variable
             name="status"
-            type="com.codewithmohsen.lastnews.clean.domain.Status" />
+            type="com.codewithmohsen.lastnews.domain.Status" />
 
         <variable
             name="viewModel"
-            type="com.codewithmohsen.lastnews.clean.presentation.vm.NewsListViewModel" />
+            type="com.codewithmohsen.lastnews.presentation.vm.NewsListViewModel" />
 
     </data>
 

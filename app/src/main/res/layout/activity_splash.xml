@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:lines="2"
-        android:text="@string/sample_project"
+        android:text="@string/last_news_app"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:gravity="center"

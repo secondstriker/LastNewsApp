@@ -15,15 +15,15 @@
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.LastNewsApp">
         <activity
-            android:name=".view.NewsListActivity"
+            android:name=".feature.view.NewsListActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".view.DetailsActivity"
+            android:name=".feature.view.DetailsActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".view.SplashActivity" android:theme="@style/SplashScreen"
+            android:name=".feature.view.SplashActivity" android:theme="@style/SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

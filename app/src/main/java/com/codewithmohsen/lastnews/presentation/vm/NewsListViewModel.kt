@@ -10,6 +10,7 @@ import com.codewithmohsen.lastnews.domain.useCase.RefreshUseCase
 import com.codewithmohsen.lastnews.domain.useCase.SetCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -21,8 +22,6 @@ class NewsListViewModel @Inject constructor(
     private val setCategoryUseCase: SetCategoryUseCase
 ) : ViewModel() {
 
-    private lateinit var job: Job
-
     private val selectedCategory = MutableLiveData<Int>()
     fun getSelectedCategory(): LiveData<Int> = selectedCategory
     fun setSelectedCategory(category: Int) {
@@ -30,23 +29,20 @@ class NewsListViewModel @Inject constructor(
     }
 
     fun fetchMoreNews() {
-        newJob()
-        viewModelScope.launch(job) {
+        viewModelScope.launch {
             fetchMoreNewsUseCase.fetchMoreNews()
         }
     }
 
     fun fetchNews(category: Category) {
-        newJob()
         setCategoryUseCase(category)
-        viewModelScope.launch(job) {
+        viewModelScope.launch {
             refreshUseCase()
         }
     }
 
     fun refresh() {
-        newJob()
-        viewModelScope.launch(job) {
+        viewModelScope.launch {
             refreshUseCase()
         }
     }
@@ -54,20 +50,8 @@ class NewsListViewModel @Inject constructor(
     fun getNewsAsFlow() = fetchMoreNewsUseCase.news
 
     fun cancel() {
-        job.cancel()
+        viewModelScope.cancel()
         Timber.d("viewModel cancel")
-    }
-
-    private fun newJob() {
-        if(!this::job.isInitialized)
-            job = Job()
-        if (job.isActive || job.isCancelled) {
-            job.cancel()
-            job = Job()
-            job.invokeOnCompletion {
-                Timber.d("viewModel job completed. is cancelled? ${job.isCancelled}")
-            }
-        }
     }
 
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -27,17 +28,12 @@ import timber.log.Timber
 @AndroidEntryPoint
 class NewsListActivity : AppCompatActivity() {
 
-    private val job: Job = Job()
-
     private val viewModel: NewsListViewModel by viewModels()
-
-    private lateinit var binding: ActivityNewsListBinding
-    private lateinit var adapter: ItemListAdapter
+    private var adapter: ItemListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_news_list)
-        binding.viewModel = viewModel
+        val binding: ActivityNewsListBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_list)
         binding.lifecycleOwner = this
 
         adapter = ItemListAdapter { item ->
@@ -47,14 +43,17 @@ class NewsListActivity : AppCompatActivity() {
         binding.itemList.layoutManager = GridLayoutManager(this, 2)
         binding.itemList.adapter = adapter
 
-        lifecycleScope.launch(job) {
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getNewsAsFlow().collect { resource ->
-                    adapter.submitList(resource.data)
+                    adapter!!.submitList(resource.data)
                     binding.status = resource.status
                     if(binding.swipeRefresh.isRefreshing)
                         binding.swipeRefresh.isRefreshing = Status.LOADING == resource.status
                             || Status.LONG_LOADING == resource.status
+
+                    if(resource.status == Status.ERROR)
+                        Toast.makeText(this@NewsListActivity, resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -94,4 +93,8 @@ class NewsListActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        adapter = null
+        super.onDestroy()
+    }
 }

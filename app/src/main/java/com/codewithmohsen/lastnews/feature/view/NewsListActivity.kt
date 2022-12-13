@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.feature.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.databinding.ActivityNewsListBinding
-import com.codewithmohsen.domain.models.Category
-import com.codewithmohsen.domain.Status
 import com.codewithmohsen.lastnews.feature.view.custom.EndlessRecyclerOnScrollListener
-import com.codewithmohsen.lastnews.presentation.vm.NewsListViewModel
+import com.codewithmohsen.presentation.NewsListViewModel
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
@@ -27,7 +25,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class NewsListActivity : AppCompatActivity() {
 
-    private val viewModel: NewsListViewModel by viewModels()
+    private val viewModel: com.codewithmohsen.presentation.NewsListViewModel by viewModels()
     private var adapter: ItemListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

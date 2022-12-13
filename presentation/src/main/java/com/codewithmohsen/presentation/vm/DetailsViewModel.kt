@@ -1,9 +1,9 @@
-package com.codewithmohsen.lastnews.presentation.vm
+package com.codewithmohsen.presentation.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.codewithmohsen.lastnews.presentation.uiModels.UiArticle
+import com.codewithmohsen.presentation.uiModels.UiArticle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

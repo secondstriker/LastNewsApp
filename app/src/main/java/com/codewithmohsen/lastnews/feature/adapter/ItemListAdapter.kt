@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.NewsItemBinding
-import com.codewithmohsen.common.di.DefaultDispatcher
-import com.codewithmohsen.lastnews.presentation.uiModels.UiArticle
+import com.codewithmohsen.presentation.UiArticle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -16,15 +15,15 @@ import kotlinx.coroutines.Dispatchers
  */
 class ItemListAdapter(
     @com.codewithmohsen.common.di.DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
-    private val itemClickCallback: ((UiArticle) -> Unit)?
-) : DataBoundListAdapter<UiArticle, NewsItemBinding>(
+    private val itemClickCallback: ((com.codewithmohsen.presentation.UiArticle) -> Unit)?
+) : DataBoundListAdapter<com.codewithmohsen.presentation.UiArticle, NewsItemBinding>(
     defaultDispatcher,
-    diffCallback = object : DiffUtil.ItemCallback<UiArticle>() {
-        override fun areItemsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
+    diffCallback = object : DiffUtil.ItemCallback<com.codewithmohsen.presentation.UiArticle>() {
+        override fun areItemsTheSame(oldItem: com.codewithmohsen.presentation.UiArticle, newItem: com.codewithmohsen.presentation.UiArticle): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: UiArticle, newItem: UiArticle): Boolean {
+        override fun areContentsTheSame(oldItem: com.codewithmohsen.presentation.UiArticle, newItem: com.codewithmohsen.presentation.UiArticle): Boolean {
             return oldItem == newItem
         }
     }
@@ -46,7 +45,7 @@ class ItemListAdapter(
         return binding
     }
 
-    override fun bind(binding: NewsItemBinding, item: UiArticle) {
+    override fun bind(binding: NewsItemBinding, item: com.codewithmohsen.presentation.UiArticle) {
         binding.item = item
     }
 }

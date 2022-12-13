@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.presentation.converters
+package com.codewithmohsen.presentation.converters
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.presentation.uiModels
+package com.codewithmohsen.presentation.uiModels
 
 import android.os.Parcel
 import android.os.Parcelable

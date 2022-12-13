@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.codewithmohsen.lastnews.presentation.uiModels.UiArticle" />
+            type="com.codewithmohsen.presentation.uiModels.UiArticle" />
 
     </data>
 

@@ -27,6 +27,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/gradlePlugins" />
+            <option value="$PROJECT_DIR$/presentation" />
           </set>
         </option>
       </GradleProjectSettings>

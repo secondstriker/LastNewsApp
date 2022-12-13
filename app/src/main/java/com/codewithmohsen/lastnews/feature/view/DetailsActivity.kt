@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.codewithmohsen.lastnews.R
-import com.codewithmohsen.lastnews.presentation.uiModels.UiArticle
-import com.codewithmohsen.lastnews.presentation.vm.DetailsViewModel
+import com.codewithmohsen.presentation.UiArticle
+import com.codewithmohsen.presentation.DetailsViewModel
 import com.codewithmohsen.lastnews.databinding.ActivityDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -19,7 +19,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class DetailsActivity: AppCompatActivity() {
 
-    private val viewModel: DetailsViewModel by viewModels()
+    private val viewModel: com.codewithmohsen.presentation.DetailsViewModel by viewModels()
     private lateinit var binding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class DetailsActivity: AppCompatActivity() {
         binding.lifecycleOwner = this
 
         if(savedInstanceState == null) {
-            val article = intent.getParcelableExtra<UiArticle>(ARTICLE_KEY)
+            val article = intent.getParcelableExtra<com.codewithmohsen.presentation.UiArticle>(ARTICLE_KEY)
             check(article != null)
             Timber.d("Article from intent: $article")
             viewModel.setArticle(article)
@@ -70,7 +70,7 @@ class DetailsActivity: AppCompatActivity() {
 
         private const val ARTICLE_KEY = "article_key"
 
-        fun startActivity(context: Context, article: UiArticle) {
+        fun startActivity(context: Context, article: com.codewithmohsen.presentation.UiArticle) {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra(ARTICLE_KEY, article)
             context.startActivity(intent)

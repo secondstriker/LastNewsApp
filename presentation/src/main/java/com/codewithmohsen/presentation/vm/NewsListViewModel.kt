@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.presentation.vm
+package com.codewithmohsen.presentation.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsListViewModel @Inject constructor(
-    private val fetchMoreNewsUseCase: com.codewithmohsen.domain.useCase.FetchMoreNewsUseCase,
-    private val refreshUseCase: com.codewithmohsen.domain.useCase.RefreshUseCase,
-    private val setCategoryUseCase: com.codewithmohsen.domain.useCase.SetCategoryUseCase
+    private val fetchMoreNewsUseCase: FetchMoreNewsUseCase,
+    private val refreshUseCase: RefreshUseCase,
+    private val setCategoryUseCase: SetCategoryUseCase
 ) : ViewModel() {
 
     private val selectedCategory = MutableLiveData<Int>()
@@ -33,7 +33,7 @@ class NewsListViewModel @Inject constructor(
         }
     }
 
-    fun fetchNews(category: com.codewithmohsen.domain.models.Category) {
+    fun fetchNews(category: Category) {
         setCategoryUseCase(category)
         viewModelScope.launch {
             refreshUseCase()

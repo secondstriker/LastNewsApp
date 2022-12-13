@@ -11,15 +11,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import timber.log.Timber
 import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
-import com.codewithmohsen.domain.models.Category
-import com.codewithmohsen.lastnews.presentation.vm.NewsListViewModel
+import com.codewithmohsen.presentation.NewsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class SelectCategoryDialogFragment: BottomSheetDialogFragment() {
 
-    val viewModel: NewsListViewModel by activityViewModels()
+    val viewModel: com.codewithmohsen.presentation.NewsListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

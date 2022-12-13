@@ -8,6 +8,7 @@
       <module name="Last_News_App.app" target="11" />
       <module name="Last_News_App.CommonAndroid" target="11" />
       <module name="Last_News_App.Data" target="11" />
+      <module name="Last_News_App.presentation" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

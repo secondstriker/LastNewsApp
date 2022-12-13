@@ -1,7 +1,7 @@
 import com.codewithmohsen.gradle.DependenciesPlugin
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-kapt")
     id("kotlin-android")
     id("com.codewithmohsen.dependencies")
@@ -12,22 +12,19 @@ android {
     compileSdk = DependenciesPlugin.CompileSdk
 
     defaultConfig {
-        applicationId = "com.codewithmohsen.lastnews"
         minSdk = DependenciesPlugin.MinSdk
         targetSdk = DependenciesPlugin.TargetSdk
-        versionCode = 1
-        versionName = "1.0"
-        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
+        release {
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "${project.rootDir}/tools/proguard-rules-debug.pro"
+                "proguard-rules.pro"
             )
         }
     }
@@ -46,9 +43,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":commonAndroid"))
-    implementation(project(":data"))
     implementation(project(":presentation"))
-    implementation(project(":feature"))
 
     implementation(DependenciesPlugin.AndroidxCore)
     implementation(DependenciesPlugin.Material)
@@ -56,42 +51,24 @@ dependencies {
     androidTestImplementation(DependenciesPlugin.AndroidxJUnit)
     androidTestImplementation(DependenciesPlugin.AndroidxEspresso)
 
-    implementation(DependenciesPlugin.Retrofit)
-    implementation(DependenciesPlugin.RetrofitMoshiConverter)
-    implementation(DependenciesPlugin.OkhttpInterceptor)
-
-
     implementation(DependenciesPlugin.KotlinXCoroutines)
     implementation(DependenciesPlugin.KotlinXCoroutinesAndroid)
 
-    implementation(DependenciesPlugin.MoshiKotlin)
-
     implementation(DependenciesPlugin.Timber)
 
-    testImplementation(DependenciesPlugin.Json)
-
-    testImplementation(DependenciesPlugin.Json)
     implementation(DependenciesPlugin.PreferencesKotlin)
 
     //hilt
     implementation(DependenciesPlugin.HiltAndroid)
     kapt(DependenciesPlugin.HiltCompiler)
 
-    // For local unit tests (robolectric)
-    testImplementation(DependenciesPlugin.HiltAndroidTesting)
-    kaptTest(DependenciesPlugin.HiltAndroidCompiler)
-
-    // For instrumentation tests
-    androidTestImplementation(DependenciesPlugin.HiltAndroidTesting)
-    kaptAndroidTest(DependenciesPlugin.HiltAndroidCompiler)
-
     implementation(DependenciesPlugin.MaterialProgressBar)
     implementation(DependenciesPlugin.ElasticView)
 
-    implementation(DependenciesPlugin.ViewModelRuntimeKtx)
-    implementation(DependenciesPlugin.lifecycleViewModelKtx)
     implementation(DependenciesPlugin.Glide)
     kapt(DependenciesPlugin.GlideKtx)
-
     implementation(DependenciesPlugin.SwipeRefreshLayout)
+
+    implementation(DependenciesPlugin.lifecycleViewModelKtx)
+    implementation(DependenciesPlugin.ViewModelRuntimeKtx)
 }

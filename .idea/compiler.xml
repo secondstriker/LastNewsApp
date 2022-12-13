@@ -6,8 +6,9 @@
       <module name="gradlePlugins.main" target="11" />
       <module name="gradlePlugins.test" target="11" />
       <module name="Last_News_App.app" target="11" />
-      <module name="Last_News_App.CommonAndroid" target="11" />
-      <module name="Last_News_App.Data" target="11" />
+      <module name="Last_News_App.commonAndroid" target="11" />
+      <module name="Last_News_App.data" target="11" />
+      <module name="Last_News_App.feature" target="11" />
       <module name="Last_News_App.presentation" target="11" />
     </bytecodeTargetLevel>
   </component>

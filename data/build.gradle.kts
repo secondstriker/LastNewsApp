@@ -43,10 +43,12 @@ dependencies {
 
     implementation(DependenciesPlugin.KotlinXCoroutines)
     implementation(DependenciesPlugin.KotlinXCoroutinesAndroid)
+    implementation(DependenciesPlugin.Moshi)
+    implementation(DependenciesPlugin.MoshiKotlin)
+    implementation(DependenciesPlugin.Retrofit)
+    implementation(DependenciesPlugin.RetrofitMoshiConverter)
+    implementation(DependenciesPlugin.OkhttpInterceptor)
     implementation(DependenciesPlugin.Timber)
     implementation(DependenciesPlugin.HiltAndroid)
     kapt(DependenciesPlugin.HiltCompiler)
-
-    implementation(DependenciesPlugin.lifecycleViewModelKtx)
-    implementation(DependenciesPlugin.AndroidXLifecycleCommon)
 }

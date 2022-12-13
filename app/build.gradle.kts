@@ -53,45 +53,14 @@ dependencies {
     implementation(DependenciesPlugin.AndroidxCore)
     implementation(DependenciesPlugin.Material)
     implementation(DependenciesPlugin.AndroidxAppCompat)
-    androidTestImplementation(DependenciesPlugin.AndroidxJUnit)
-    androidTestImplementation(DependenciesPlugin.AndroidxEspresso)
 
     implementation(DependenciesPlugin.Retrofit)
     implementation(DependenciesPlugin.RetrofitMoshiConverter)
     implementation(DependenciesPlugin.OkhttpInterceptor)
-
-
     implementation(DependenciesPlugin.KotlinXCoroutines)
     implementation(DependenciesPlugin.KotlinXCoroutinesAndroid)
-
     implementation(DependenciesPlugin.MoshiKotlin)
-
     implementation(DependenciesPlugin.Timber)
-
-    testImplementation(DependenciesPlugin.Json)
-
-    testImplementation(DependenciesPlugin.Json)
-    implementation(DependenciesPlugin.PreferencesKotlin)
-
-    //hilt
     implementation(DependenciesPlugin.HiltAndroid)
     kapt(DependenciesPlugin.HiltCompiler)
-
-    // For local unit tests (robolectric)
-    testImplementation(DependenciesPlugin.HiltAndroidTesting)
-    kaptTest(DependenciesPlugin.HiltAndroidCompiler)
-
-    // For instrumentation tests
-    androidTestImplementation(DependenciesPlugin.HiltAndroidTesting)
-    kaptAndroidTest(DependenciesPlugin.HiltAndroidCompiler)
-
-    implementation(DependenciesPlugin.MaterialProgressBar)
-    implementation(DependenciesPlugin.ElasticView)
-
-    implementation(DependenciesPlugin.ViewModelRuntimeKtx)
-    implementation(DependenciesPlugin.lifecycleViewModelKtx)
-    implementation(DependenciesPlugin.Glide)
-    kapt(DependenciesPlugin.GlideKtx)
-
-    implementation(DependenciesPlugin.SwipeRefreshLayout)
 }

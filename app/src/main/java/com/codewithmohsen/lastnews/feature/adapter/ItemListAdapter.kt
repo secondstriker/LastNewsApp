@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.databinding.NewsItemBinding
-import com.codewithmohsen.lastnews.domain.di.DefaultDispatcher
+import com.codewithmohsen.common.di.DefaultDispatcher
 import com.codewithmohsen.lastnews.presentation.uiModels.UiArticle
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
  * A RecyclerView adapter for [Item List] class.
  */
 class ItemListAdapter(
-    @DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    @com.codewithmohsen.common.di.DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val itemClickCallback: ((UiArticle) -> Unit)?
 ) : DataBoundListAdapter<UiArticle, NewsItemBinding>(
     defaultDispatcher,

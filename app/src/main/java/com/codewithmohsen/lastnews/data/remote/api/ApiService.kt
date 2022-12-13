@@ -3,10 +3,10 @@ package com.codewithmohsen.lastnews.data.remote.api
 
 import com.codewithmohsen.lastnews.data.remote.api.Constants.COUNTRY
 import com.codewithmohsen.lastnews.data.remote.api.Constants.PAGE_SIZE
-import com.codewithmohsen.lastnews.domain.api.APIErrorResponse
-import com.codewithmohsen.lastnews.domain.api.ErrorModel
-import com.codewithmohsen.lastnews.domain.api.NetworkResponse
-import com.codewithmohsen.lastnews.domain.models.ResponseModel
+import com.codewithmohsen.domain.api.APIErrorResponse
+import com.codewithmohsen.domain.api.ErrorModel
+import com.codewithmohsen.domain.api.NetworkResponse
+import com.codewithmohsen.domain.models.ResponseModel
 import retrofit2.http.*
 
 
@@ -22,6 +22,6 @@ interface ApiService {
         @Query("country") country: String = COUNTRY,
         @Query("category") category: String,
         @Query("page") page: Int
-    ): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>>
+    ): com.codewithmohsen.domain.api.NetworkResponse<com.codewithmohsen.domain.models.ResponseModel, com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel>>
 
 }

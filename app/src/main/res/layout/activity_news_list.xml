@@ -5,12 +5,12 @@
 
     <data>
 
-        <import type="com.codewithmohsen.lastnews.domain.Status" />
+        <import type="com.codewithmohsen.domain.Status" />
         <import type="android.view.View" />
 
         <variable
             name="status"
-            type="com.codewithmohsen.lastnews.domain.Status" />
+            type="com.codewithmohsen.domain.Status" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

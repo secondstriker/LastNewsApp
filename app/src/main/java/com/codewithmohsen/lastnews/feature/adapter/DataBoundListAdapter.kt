@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import android.view.ViewGroup
-import com.codewithmohsen.lastnews.domain.di.DefaultDispatcher
+import com.codewithmohsen.common.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -17,7 +17,7 @@ import kotlinx.coroutines.asExecutor
  * @param <V> The type of the ViewDataBinding
 </V></T> */
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
-    @DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    @com.codewithmohsen.common.di.DefaultDispatcher defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
     diffCallback: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, DataBoundViewHolder<V>>(
     AsyncDifferConfig.Builder<T>(diffCallback)

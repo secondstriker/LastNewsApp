@@ -62,6 +62,9 @@ class DependenciesPlugin : Plugin<Project> {
         const val HiltAndroidTesting = "com.google.dagger:hilt-android-testing:2.38.1"
         const val HiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
 
+        const val Dagger = "com.google.dagger:dagger:2.44.2"
+        const val DaggerCompiler = "com.google.dagger:dagger-compiler:2.44.2"
+
         const val KotlinXSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
         const val Gson = "com.google.code.gson:gson:2.8.8"
 

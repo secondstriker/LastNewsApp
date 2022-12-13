@@ -1,11 +1,6 @@
 package com.codewithmohsen.lastnews.data
 
-import com.codewithmohsen.lastnews.common.Config
-import com.codewithmohsen.lastnews.common.Logger
-import com.codewithmohsen.lastnews.domain.di.CoroutinesScopesModule.ApplicationScope
-import com.codewithmohsen.lastnews.domain.di.IoDispatcher
-import com.codewithmohsen.lastnews.domain.models.ResponseModel
-import com.codewithmohsen.lastnews.domain.repository.BaseOnlineRepository
+import com.codewithmohsen.commonandroid.di.CoroutinesScopesModule.ApplicationScope
 import com.codewithmohsen.lastnews.presentation.mappers.map
 import com.codewithmohsen.lastnews.presentation.uiModels.UiArticle
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,16 +8,16 @@ import kotlinx.coroutines.CoroutineScope
 import timber.log.Timber
 
 abstract class PaginationNewsRepository(
-    config: Config,
-    logger: Logger,
+    config: com.codewithmohsen.common.Config,
+    logger: com.codewithmohsen.common.Logger,
     @ApplicationScope private val externalCoroutineScope: CoroutineScope,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : BaseOnlineRepository<ResponseModel, List<UiArticle>>(config, logger, externalCoroutineScope, ioDispatcher) {
+    @com.codewithmohsen.common.di.IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) : com.codewithmohsen.domain.repository.BaseOnlineRepository<com.codewithmohsen.domain.models.ResponseModel, List<UiArticle>>(config, logger, externalCoroutineScope, ioDispatcher) {
 
     var page: Int = 1
         private set
 
-    override suspend fun bodyToResult(apiModel: ResponseModel?): List<UiArticle> {
+    override suspend fun bodyToResult(apiModel: com.codewithmohsen.domain.models.ResponseModel?): List<UiArticle> {
         val preResult = super.getResultAsFlow().value
         page++
 

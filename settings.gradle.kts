@@ -11,3 +11,6 @@ include(":app")
 
 //For dependency management, we use a gradle plugin
 includeBuild("gradlePlugins")
+include(":domain")
+include(":common")
+include(":CommonAndroid")

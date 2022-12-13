@@ -10,15 +10,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.codewithmohsen.lastnews.R
 import com.codewithmohsen.lastnews.feature.adapter.ItemListAdapter
 import com.codewithmohsen.lastnews.databinding.ActivityNewsListBinding
-import com.codewithmohsen.lastnews.domain.models.Category
-import com.codewithmohsen.lastnews.domain.Status
+import com.codewithmohsen.domain.models.Category
+import com.codewithmohsen.domain.Status
 import com.codewithmohsen.lastnews.feature.view.custom.EndlessRecyclerOnScrollListener
 import com.codewithmohsen.lastnews.presentation.vm.NewsListViewModel
 import kotlinx.coroutines.flow.collect
@@ -49,16 +48,16 @@ class NewsListActivity : AppCompatActivity() {
                     adapter!!.submitList(resource.data)
                     binding.status = resource.status
                     if(binding.swipeRefresh.isRefreshing)
-                        binding.swipeRefresh.isRefreshing = Status.LOADING == resource.status
-                            || Status.LONG_LOADING == resource.status
+                        binding.swipeRefresh.isRefreshing = com.codewithmohsen.domain.Status.LOADING == resource.status
+                            || com.codewithmohsen.domain.Status.LONG_LOADING == resource.status
 
-                    if(resource.status == Status.ERROR)
+                    if(resource.status == com.codewithmohsen.domain.Status.ERROR)
                         Toast.makeText(this@NewsListActivity, resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        viewModel.fetchNews(category = Category.general)
+        viewModel.fetchNews(category = com.codewithmohsen.domain.models.Category.general)
 
         binding.itemList.addOnScrollListener(object :
             EndlessRecyclerOnScrollListener(binding.itemList.layoutManager!!,0){

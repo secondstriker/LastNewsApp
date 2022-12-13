@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import timber.log.Timber
 import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
-import com.codewithmohsen.lastnews.domain.models.Category
+import com.codewithmohsen.domain.models.Category
 import com.codewithmohsen.lastnews.presentation.vm.NewsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +33,7 @@ class SelectCategoryDialogFragment: BottomSheetDialogFragment() {
             Timber.d("BottomSheetDialogFragment selected category ${checkedRadioButton.tag as String}")
 
             if(viewModel.getSelectedCategory().value != checkedId) {
-                viewModel.fetchNews(Category.valueOf(checkedRadioButton.tag as String))
+                viewModel.fetchNews(com.codewithmohsen.domain.models.Category.valueOf(checkedRadioButton.tag as String))
                 viewModel.setSelectedCategory(checkedId)
                 dismiss()
             }

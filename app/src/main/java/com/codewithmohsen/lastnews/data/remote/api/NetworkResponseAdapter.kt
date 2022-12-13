@@ -1,8 +1,8 @@
 package com.codewithmohsen.lastnews.data.remote.api
 
-import com.codewithmohsen.lastnews.domain.api.APIErrorResponse
-import com.codewithmohsen.lastnews.domain.api.ErrorModel
-import com.codewithmohsen.lastnews.domain.api.NetworkResponse
+import com.codewithmohsen.domain.api.APIErrorResponse
+import com.codewithmohsen.domain.api.ErrorModel
+import com.codewithmohsen.domain.api.NetworkResponse
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout
@@ -12,23 +12,23 @@ import java.io.IOException
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
-class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
+class NetworkResponseAdapter<S : Any, E : com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel>>(
     private val successType: Type,
-    private val errorModelConverter: Converter<ResponseBody, ErrorModel>
-) : CallAdapter<S, Call<NetworkResponse<S, E>>> {
+    private val errorModelConverter: Converter<ResponseBody, com.codewithmohsen.domain.api.ErrorModel>
+) : CallAdapter<S, Call<com.codewithmohsen.domain.api.NetworkResponse<S, E>>> {
 
     override fun responseType(): Type = successType
 
-    override fun adapt(call: Call<S>): Call<NetworkResponse<S, E>> {
+    override fun adapt(call: Call<S>): Call<com.codewithmohsen.domain.api.NetworkResponse<S, E>> {
         return NetworkResponseCall(call, errorModelConverter)
     }
 
-    internal class NetworkResponseCall<S : Any, E : APIErrorResponse<ErrorModel>>(
+    internal class NetworkResponseCall<S : Any, E : com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel>>(
         private val delegate: Call<S>,
-        private val errorConverter: Converter<ResponseBody, ErrorModel>
-    ) : Call<NetworkResponse<S, E>> {
+        private val errorConverter: Converter<ResponseBody, com.codewithmohsen.domain.api.ErrorModel>
+    ) : Call<com.codewithmohsen.domain.api.NetworkResponse<S, E>> {
 
-        override fun enqueue(callback: Callback<NetworkResponse<S, E>>) {
+        override fun enqueue(callback: Callback<com.codewithmohsen.domain.api.NetworkResponse<S, E>>) {
             return delegate.enqueue(object : Callback<S> {
                 override fun onResponse(call: Call<S>, response: Response<S>) {
                     val body = response.body()
@@ -45,14 +45,14 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
                             Timber.d("API success")
                             callback.onResponse(
                                 this@NetworkResponseCall,
-                                Response.success(NetworkResponse.Success(body))
+                                Response.success(com.codewithmohsen.domain.api.NetworkResponse.Success(body))
                             )
                         } else {
                             Timber.d("API body is null")
                             // Response is successful but the body is null
                             callback.onResponse(
                                 this@NetworkResponseCall,
-                                Response.success(NetworkResponse.Empty(null))
+                                Response.success(com.codewithmohsen.domain.api.NetworkResponse.Empty(null))
                             )
                         }
                     } else {
@@ -62,13 +62,17 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
                         callback.onResponse(
                             this@NetworkResponseCall,
                             Response.success(
-                                NetworkResponse.APIError(
+                                com.codewithmohsen.domain.api.NetworkResponse.APIError(
                                     createApiErrorResponse(
                                         code,
-                                        errorBody ?: ErrorModel(ERROR_STATUS, ERROR_CODE, ERROR_MESSAGE)
+                                        errorBody ?: com.codewithmohsen.domain.api.ErrorModel(
+                                            ERROR_STATUS,
+                                            ERROR_CODE,
+                                            ERROR_MESSAGE
+                                        )
                                     )
                                 )
-                                        as NetworkResponse<S, E>
+                                        as com.codewithmohsen.domain.api.NetworkResponse<S, E>
                             )
                         )
                     }
@@ -77,8 +81,8 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
                 override fun onFailure(call: Call<S>, throwable: Throwable) {
                     Timber.d("API onFailure.")
                     val networkResponse = when (throwable) {
-                        is IOException -> NetworkResponse.NetworkError(throwable)
-                        else -> NetworkResponse.UnknownError(throwable)
+                        is IOException -> com.codewithmohsen.domain.api.NetworkResponse.NetworkError(throwable)
+                        else -> com.codewithmohsen.domain.api.NetworkResponse.UnknownError(throwable)
                     }
                     callback.onResponse(this@NetworkResponseCall, Response.success(networkResponse))
                 }
@@ -87,20 +91,20 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
 
         private fun createApiErrorResponse(
             code: Int,
-            errorModel: ErrorModel
-        ): APIErrorResponse<ErrorModel> {
+            errorModel: com.codewithmohsen.domain.api.ErrorModel
+        ): com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel> {
             return when (code) {
-                401 -> APIErrorResponse.Unauthenticated(errorModel)
-                in 400..499 -> APIErrorResponse.ClientErrorResponse(errorModel)
-                in 500..599 -> APIErrorResponse.ServerErrorResponse(errorModel)
-                else -> APIErrorResponse.UnexpectedErrorResponse(errorModel)
+                401 -> com.codewithmohsen.domain.api.APIErrorResponse.Unauthenticated(errorModel)
+                in 400..499 -> com.codewithmohsen.domain.api.APIErrorResponse.ClientErrorResponse(errorModel)
+                in 500..599 -> com.codewithmohsen.domain.api.APIErrorResponse.ServerErrorResponse(errorModel)
+                else -> com.codewithmohsen.domain.api.APIErrorResponse.UnexpectedErrorResponse(errorModel)
             }
         }
 
         /**
          * We use Kotlin reflection for converting ResponseBody to ErrorBody.
          */
-        private fun convertToErrorBody(error: ResponseBody?): ErrorModel? {
+        private fun convertToErrorBody(error: ResponseBody?): com.codewithmohsen.domain.api.ErrorModel? {
             return when {
                 error == null -> null
                 error.contentLength() == 0L -> null
@@ -121,7 +125,7 @@ class NetworkResponseAdapter<S : Any, E : APIErrorResponse<ErrorModel>>(
 
         override fun cancel() = delegate.cancel()
 
-        override fun execute(): Response<NetworkResponse<S, E>> {
+        override fun execute(): Response<com.codewithmohsen.domain.api.NetworkResponse<S, E>> {
             throw UnsupportedOperationException("NetworkResponseCall doesn't support execute")
         }
 

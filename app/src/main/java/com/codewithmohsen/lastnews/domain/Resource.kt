@@ -2,7 +2,7 @@ package com.codewithmohsen.lastnews.domain
 
 
 /**
- * A generic class that holds a value with its loading status.
+ * A generic class that holds a value with its status.
  * @param <T>
 </T> */
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {

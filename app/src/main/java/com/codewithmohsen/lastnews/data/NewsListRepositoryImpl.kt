@@ -26,7 +26,7 @@ class NewsListRepositoryImpl @Inject constructor(
     config: Config,
     logger: Logger,
     private val apiService: ApiService,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @ApplicationScope private val externalCoroutineDispatcher: CoroutineScope
 ): PaginationNewsRepository(config, logger, externalCoroutineDispatcher, ioDispatcher),
     NewsListRepository {

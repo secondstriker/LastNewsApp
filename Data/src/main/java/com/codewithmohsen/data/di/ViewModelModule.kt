@@ -1,7 +1,7 @@
-package com.codewithmohsen.lastnews.data.di
+package com.codewithmohsen.data.di
 
 
-import com.codewithmohsen.lastnews.data.NewsListRepositoryImpl
+import com.codewithmohsen.data.NewsListRepositoryImpl
 import com.codewithmohsen.domain.repository.NewsListRepository
 import dagger.Binds
 import dagger.Module
@@ -15,6 +15,6 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindNewsListRepository(
         newsListRepositoryImpl: NewsListRepositoryImpl
-    ): com.codewithmohsen.domain.repository.NewsListRepository
+    ): NewsListRepository
 
 }

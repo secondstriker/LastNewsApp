@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.data.remote.api
+package com.codewithmohsen.data.api
 
 import com.codewithmohsen.domain.api.APIErrorResponse
 import com.codewithmohsen.domain.api.ErrorModel
@@ -33,7 +33,7 @@ class NetworkResponseAdapterFactory : CallAdapter.Factory() {
         // get the response type inside the `Call` type
         val responseType = getParameterUpperBound(0, returnType)
         // if the response type is not NetworkResponse then we can't handle this type, so we return null
-        if (getRawType(responseType) != com.codewithmohsen.domain.api.NetworkResponse::class.java) {
+        if (getRawType(responseType) != NetworkResponse::class.java) {
             return null
         }
 
@@ -44,9 +44,9 @@ class NetworkResponseAdapterFactory : CallAdapter.Factory() {
         Timber.d("successResponseType $successBodyType")
 
         // Look up a converter for the Error type on the Retrofit instance.
-        val errorConverter: Converter<ResponseBody, com.codewithmohsen.domain.api.ErrorModel> =
-            retrofit.responseBodyConverter(com.codewithmohsen.domain.api.ErrorModel::class.java, arrayOfNulls(0))
+        val errorConverter: Converter<ResponseBody, ErrorModel> =
+            retrofit.responseBodyConverter(ErrorModel::class.java, arrayOfNulls(0))
 
-        return NetworkResponseAdapter<Any, com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel>>(successBodyType, errorConverter)
+        return NetworkResponseAdapter<Any, APIErrorResponse<ErrorModel>>(successBodyType, errorConverter)
     }
 }

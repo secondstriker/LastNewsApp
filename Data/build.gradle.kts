@@ -38,11 +38,17 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":domain"))
+    implementation(project(":CommonAndroid"))
 
-    implementation(DependenciesPlugin.HiltAndroid)
-    kapt(DependenciesPlugin.HiltCompiler)
-    implementation(DependenciesPlugin.Timber)
     implementation(DependenciesPlugin.KotlinXCoroutines)
     implementation(DependenciesPlugin.KotlinXCoroutinesAndroid)
+    implementation(DependenciesPlugin.Moshi)
+    implementation(DependenciesPlugin.MoshiKotlin)
+    implementation(DependenciesPlugin.Retrofit)
+    implementation(DependenciesPlugin.RetrofitMoshiConverter)
+    implementation(DependenciesPlugin.OkhttpInterceptor)
+    implementation(DependenciesPlugin.Timber)
+    implementation(DependenciesPlugin.HiltAndroid)
+    kapt(DependenciesPlugin.HiltCompiler)
 }

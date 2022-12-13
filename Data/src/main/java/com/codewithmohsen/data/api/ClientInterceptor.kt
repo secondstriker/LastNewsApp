@@ -1,4 +1,4 @@
-package com.codewithmohsen.lastnews.data.remote.api
+package com.codewithmohsen.data.api
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

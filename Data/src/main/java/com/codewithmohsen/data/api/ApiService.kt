@@ -1,8 +1,8 @@
-package com.codewithmohsen.lastnews.data.remote.api
+package com.codewithmohsen.data.api
 
 
-import com.codewithmohsen.lastnews.data.remote.api.Constants.COUNTRY
-import com.codewithmohsen.lastnews.data.remote.api.Constants.PAGE_SIZE
+import com.codewithmohsen.data.api.Constants.COUNTRY
+import com.codewithmohsen.data.api.Constants.PAGE_SIZE
 import com.codewithmohsen.domain.api.APIErrorResponse
 import com.codewithmohsen.domain.api.ErrorModel
 import com.codewithmohsen.domain.api.NetworkResponse
@@ -22,6 +22,6 @@ interface ApiService {
         @Query("country") country: String = COUNTRY,
         @Query("category") category: String,
         @Query("page") page: Int
-    ): com.codewithmohsen.domain.api.NetworkResponse<com.codewithmohsen.domain.models.ResponseModel, com.codewithmohsen.domain.api.APIErrorResponse<com.codewithmohsen.domain.api.ErrorModel>>
+    ): NetworkResponse<ResponseModel, APIErrorResponse<ErrorModel>>
 
 }

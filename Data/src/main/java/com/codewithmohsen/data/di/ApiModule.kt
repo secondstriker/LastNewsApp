@@ -1,11 +1,10 @@
-package com.codewithmohsen.lastnews.data.di
+package com.codewithmohsen.data.di
 
-
-import com.codewithmohsen.lastnews.BuildConfig
-import com.codewithmohsen.lastnews.data.remote.api.ApiService
-import com.codewithmohsen.lastnews.data.remote.api.ClientInterceptor
-import com.codewithmohsen.lastnews.data.remote.api.Constants
-import com.codewithmohsen.lastnews.data.remote.api.NetworkResponseAdapterFactory
+import com.codewithmohsen.data.BuildConfig
+import com.codewithmohsen.data.api.ApiService
+import com.codewithmohsen.data.api.ClientInterceptor
+import com.codewithmohsen.data.api.Constants
+import com.codewithmohsen.data.api.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

@@ -1,5 +1,6 @@
 package com.codewithmohsen.lastnews.commonAndroid
 
+import com.codewithmohsen.lastnews.common.BetterLogger
 import com.codewithmohsen.lastnews.common.Config
 import com.codewithmohsen.lastnews.common.Logger
 import dagger.Binds
@@ -16,4 +17,7 @@ abstract class CommonModule {
 
     @Binds
     abstract fun bindLogger(loggerImpl: LoggerImpl): Logger
+
+    @Binds
+    abstract fun bindBetterLogger(betterLogger: BetterLoggerImpl): BetterLogger
 }

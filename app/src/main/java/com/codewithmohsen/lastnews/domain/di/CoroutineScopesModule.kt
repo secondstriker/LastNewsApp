@@ -1,11 +1,11 @@
 package com.codewithmohsen.lastnews.domain.di
 
+import com.codewithmohsen.lastnews.common.BetterLogger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
-import timber.log.Timber
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -24,11 +24,12 @@ object CoroutinesScopesModule {
     @ApplicationScope
     @Provides
     fun providesCoroutineScopeForApplication(
+        logger: BetterLogger,
         @DefaultDispatcher defaultDispatcher: CoroutineDispatcher
     ): CoroutineScope = CoroutineScope(SupervisorJob() + defaultDispatcher
             + CoroutineName("ExternalCoroutineScope") +
             CoroutineExceptionHandler { _, throwable ->
-            Timber.d(throwable)
+            logger.d(throwable)
     })
 
 }

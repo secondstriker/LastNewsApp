@@ -4,7 +4,7 @@ import com.codewithmohsen.lastnews.common.Logger
 import timber.log.Timber
 import javax.inject.Inject
 
-class LoggerImpl @Inject constructor(): Logger {
+open class LoggerImpl @Inject constructor(): Logger {
     override fun d(message: String, tag: String?) {
         if(tag != null) Timber.tag(tag).d(message)
         else Timber.d(message)

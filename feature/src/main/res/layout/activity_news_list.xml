@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.codewithmohsen.domain.Status" />
+        <import type="android.view.View" />
+
+        <variable
+            name="status"
+            type="com.codewithmohsen.domain.Status" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/news_item" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            android:id="@+id/cancelContainer"
+            layout="@layout/long_loading_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:status="@{status}" />
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:indeterminate="true"
+            android:visibility="@{status == Status.LOADING || status == Status.LONG_LOADING ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:mpb_progressStyle="horizontal"
+            app:mpb_useIntrinsicPadding="false" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

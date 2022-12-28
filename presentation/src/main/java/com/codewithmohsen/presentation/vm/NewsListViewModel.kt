@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.codewithmohsen.domain.Resource
 import com.codewithmohsen.domain.models.Article
 import com.codewithmohsen.domain.models.Category
-import com.codewithmohsen.domain.useCase.FetchMoreNewsUseCase
-import com.codewithmohsen.domain.useCase.RefreshUseCase
-import com.codewithmohsen.domain.useCase.SetCategoryUseCase
+import com.codewithmohsen.presentation.useCase.FetchMoreNewsUseCase
+import com.codewithmohsen.presentation.useCase.RefreshUseCase
+import com.codewithmohsen.presentation.useCase.SetCategoryUseCase
 import com.codewithmohsen.presentation.mappers.map
 import com.codewithmohsen.presentation.uiModels.UiArticle
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -56,9 +56,7 @@ class NewsListViewModel @Inject constructor(
     }
 
     fun getNewsAsFlow(): Flow<Resource<List<UiArticle>>> =
-        fetchMoreNewsUseCase.news.map { resource ->
-            Resource(resource.status, resource.data?.map { it.map() }, resource.message)
-        }
+        fetchMoreNewsUseCase.news
 
     fun cancel() {
         viewModelScope.cancel()

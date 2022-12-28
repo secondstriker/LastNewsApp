@@ -1,4 +1,4 @@
-package com.codewithmohsen.domain.useCase
+package com.codewithmohsen.presentation.useCase
 
 import com.codewithmohsen.domain.models.Category
 import com.codewithmohsen.domain.repository.NewsListRepository
